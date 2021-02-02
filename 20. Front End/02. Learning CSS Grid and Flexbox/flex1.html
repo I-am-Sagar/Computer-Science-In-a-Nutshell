@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying Flexbox</title>
+
+    <style>
+        /* To make things responsive, just add containers in media query. */
+        @media(min-width: 786px) {
+            .container-1 {
+                display: flex;
+                /*
+                Possible values: flex-start, flex-end, center, strech(default).
+                align-items:flex-end;   
+
+                flex-direction: column;
+                */
+            }
+
+            .container-2 {
+                display: flex;
+
+                /* Possible values: flex-start(default), flex-end, stretch, center,
+                                    space-evenly, space-between. */
+                justify-content: space-evenly;
+            }
+        }
+
+        .container-1 div, .container-2 div{
+            border: 1px #ccc solid;
+            padding: 10px;
+        }
+
+        .box-1{ 
+            flex: 3;
+            order: 2;
+        }
+
+        .box-2{
+            flex: 1;
+            order: 1;
+        }
+
+        .box-3{
+            flex: 1;
+            order: 3;
+        }
+
+        .container-2-box{
+            /* width: 25%; */
+            flex-basis: 25%;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container-1">
+        <div class="box-1">
+            <h3>Box One</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        </div>
+        <div class="box-2">
+            <h3>Box Two</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        </div>
+        <div class="box-3">
+            <h3>Box Three</h3>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing.</p>
+        </div>
+    </div>
+
+    <div class="container-2">
+        <div class="container-2-box">
+            <h3>Box Four</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                Optio temporibus quam saepe! Perferendis, quisquam quasi!</p>
+        </div>
+        <div class="container-2-box">
+            <h3>Box Five</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                Optio temporibus quam saepe! Perferendis, quisquam quasi!</p>
+        </div>
+        <div class="container-2-box">
+            <h3>Box Six</h3>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+                Optio temporibus quam saepe! Perferendis, quisquam quasi!</p>
+        </div>
+    </div>
+</body>
+
+</html>

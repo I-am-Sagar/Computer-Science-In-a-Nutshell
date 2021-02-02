@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying CSS Grid - 2</title>
+
+    <style>
+        .wrapper {
+            display: grid;
+            /*grid-template-columns: 1fr 1fr 1fr;*/
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 1em;
+            /* grid-auto-rows: 100px; */
+            /* Issue with fixed heights like 100px is, if the content increased
+               in any of the divs, it will go behind other divs. Try by adding
+               Lorem40 (40 words of Lorem ipsum text) in any of the divs. */
+            grid-auto-rows: minmax(100px, auto);
+            /* Now, it will be 100px by default, but it will stretch if content
+               got increased. */
+        }
+
+        .nested {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: minmax(50px, auto);
+            grid-gap: 1em;
+        }
+
+        .wrapper > div{
+            background: #eee;
+            padding: 1em;
+        }
+
+        .wrapper > div:nth-child(odd){
+            background: #bbb;
+        }
+
+        .nested > div{
+            border: #333 1px solid; 
+            padding: 1em;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div class="nested">
+            <div>Lorem</div>
+            <div>Lorem</div>
+            <div>Lorem</div>
+            <div>Lorem</div>
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+        <div>
+            Lorem ipsum dolor sit.
+        </div>
+    </div>
+</body>
+
+</html>

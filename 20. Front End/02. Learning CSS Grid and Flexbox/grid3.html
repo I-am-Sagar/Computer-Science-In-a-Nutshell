@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying CSS Grid - 3</title>
+
+    <style>
+        .wrapper {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
+            grid-auto-rows: minmax(100px, auto);
+            grid-gap: 1em;
+            /* Possible values: start center end stretch. Default is 'stretch'.*/
+            justify-items: stretch; 
+            align-items: stretch;
+        }
+
+        .wrapper > div{
+            background: #eee;
+            padding: 1em;
+        }
+
+        .wrapper > div:nth-child(odd){
+            background: #bbb;
+        }
+
+        .box1{
+            /* align-self: start;*/
+            grid-column: 1/3;
+            grid-row: 1/3;
+        }
+
+        .box2{
+            /* align-self: end; */
+
+            /* Doesn't always need to be the span. It can be a position. */
+            grid-column: 3; 
+            grid-row: 1/3;
+
+        }
+
+        .box3{
+            /* justify-self: center; */
+
+            /* By saying grid-col of box 3, to start at col 2 and span till col 4,
+               we are actually rearranging the position of grid. Look at the 
+               output - that grid 4 has now come before grid 3 on second row. */
+            grid-column: 2/4;
+            grid-row: 3;
+        }
+
+        .box4{
+            /* Using grid, you can overlap the boxes. Box 4 overlaps Box 1.*/
+            grid-column: 1;
+            grid-row: 2/4;
+
+            /* Border around box 4 to make it look better. */
+            border-top: #fff 1em solid;
+            border-right: #fff 1em solid;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="box box1">Box 1</div>
+        <div class="box box2">Box 2</div>
+        <div class="box box3">Box 3</div>
+        <div class="box box4">Box 4</div>
+    </div>
+</body>
+
+</html>

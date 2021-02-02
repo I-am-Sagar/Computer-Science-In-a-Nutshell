@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trying CSS Grid</title>
+
+    <style>
+        .wrapper{
+            display:grid;
+            grid-template-columns: 70% 30%;
+            grid-gap: 1em 1em;
+        }
+        .wrapper > div{
+            background: #eee;
+            padding: 1em;
+        }
+        .wrapper > div:nth-child(odd){
+            background: #bbb;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum 
+            voluptatibus provident eos! Alias sit eos architecto eum illo 
+            impedit reprehenderit deserunt, et error ea animi ad sapiente 
+            sequi quia beatae quaerat nemo rerum natus odit quas dolorem, 
+            quisquam repellat? Eaque dignissimos asperiores corrupti! Dolore 
+            sequi unde earum, aperiam animi delectus aliquam vero sapiente 
+            minus incidunt quisquam fugit recusandae excepturi laborum nam 
+            mollitia dolorum, quasi provident eveniet deserunt illo libero 
+            iusto! Enim maiores, tempora fugit eveniet dolore minima ipsa 
+            rerum ducimus.
+        </div>
+
+        <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Nulla 
+            iste optio distinctio asperiores? Perferendis atque ducimus 
+            mollitia, nisi reprehenderit error voluptate dolorem assumenda 
+            similique iusto voluptatum, iste ad vero enim!
+        </div>
+
+        <div>
+            Hello World!
+        </div>
+
+        <div>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptas 
+            eum blanditiis perferendis doloribus? Vero aperiam cum earum 
+            blanditiis exercitationem optio magni aliquid illum dolorum, 
+            recusandae laborum alias quod ex saepe vitae autem et debitis 
+            inventore mollitia sit! Pariatur ea vel inventore quisquam beatae 
+            expedita, laudantium neque suscipit omnis necessitatibus quia?
+        </div>
+
+        <div>
+            This even works with odd number of paragraphs!
+        </div>
+    </div>
+</body>
+
+</html>

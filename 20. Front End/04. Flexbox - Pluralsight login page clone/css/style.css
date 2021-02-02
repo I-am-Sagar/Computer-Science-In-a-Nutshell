@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box; 
+}
+
+body {
+    font-family: 'Roboto', Arial, Helvetica, sans-serif;
+    font-weight: 300;
+    background: #0d0f12;
+    color: white;
+    overflow: hidden;
+}
+
+#wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+#left {
+    display: flex;
+    flex-direction: column;
+    flex:1;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+
+#right {
+    flex:1;
+}   
+
+/* Sign in */
+#signin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    padding-bottom: 1rem;
+}
+
+#signin form {
+    width: 80%;
+    padding-bottom: 3rem;
+}
+
+#signin .logo {
+    margin-bottom: 8vh;
+}
+
+#signin .logo img{
+    width: 300px;
+}
+
+#signin label {
+    font-size: 0.8rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.05rem;
+}
+
+#signin .text-input {
+    margin-bottom: 1.3rem;
+    width: 100%;
+    border-radius: 2px;
+    background-color: #0d0f12;
+    border: 1px solid #56575a;
+    color: #ccc;
+    padding: 0.7rem 1rem;
+    line-height: 1rem; 
+}
+
+#signin .primary-btn {
+    width: 100%;
+}
+
+.links a {
+    color: #0084bd;
+    text-decoration: none;
+    margin-bottom: 1rem;
+    display: block;
+    text-align: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.links a:hover {
+    text-decoration: underline;
+    color: #006b99;
+}
+
+hr {
+    width: 80%;
+    height: 0.05rem;
+    background-color: #363739;
+    border: none;
+    margin-bottom: 1.5rem;
+}
+
+/* Showcase */
+#showcase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: url('../img/login_skills.jpg') no-repeat center center/cover;
+    height: 100vh;
+}
+
+#showcase img{
+    width: 118%;
+    padding-bottom: 80px;
+    padding-right: 90px;
+}
+
+#showcase a{
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 0.15rem;
+    text-transform: uppercase;
+    text-align: center;
+    outline: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 0.8rem 4rem;
+    transition: all 0.5s ease-in-out;
+}
+
+#showcase a:hover, a:focus {
+    box-shadow: inset 0 0 0 1px #fff;
+}
+
+/* Footer */
+#main-footer {
+    color: #ccc;
+    padding: 0 0.8rem;
+    font-size: 0.9rem;
+    padding-top: 4rem;
+}
+
+#main-footer div {
+    text-align: center;
+}
+
+#main-footer div a {
+    text-decoration: underline;
+    color: #ccc;
+}
+
+/* Buttons */
+.primary-btn {
+    padding: 0.7rem 1rem;
+    height: 2.5rem;
+    display: block;
+    border: none;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 15px;
+    background-color: #0084bd;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.primary-btn:hover {
+    background-color: #006b99;
+}
+
+.secondary-btn {
+    padding: 0.7rem 1rem;
+    height: 2.5rem;
+    display: block;
+    border: none;
+    border-radius: 2px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    font-size: 14px;
+    background-color: #363739;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.5s;
+    width: 80%;
+}
+
+.secondary-btn:hover {
+    background-color: #444;
+}
+
+/* Media Queries */
+@media(min-width: 1200px) {
+    #left{
+        flex: 4;
+    }
+
+    #right {
+        flex: 6;
+    }
+}
+
+@media(max-width: 768px) {
+    body {
+        overflow: auto;
+    }
+    #right {
+        display: none;
+    }
+    #left {
+        justify-content: start;
+        margin: 4vh;
+    }
+    #sigin .logo {
+        margin-bottom: 2vh;
+    }
+
+    #main-footer {
+        padding-top: 1rem;
+    }
+}
