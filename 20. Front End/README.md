@@ -4,27 +4,27 @@ This is the showcase area of all the websites I made (by looking up various tuto
 
 ### 1. Basic Responsive Website
 
-![index.html](/images/1_01.png)
-![about.html](/images/1_02.png)
-![services.html](/images/1_01.png)
+![index.html](20.%20Front%20End/images/1_01.png)
+![about.html](20.%20Front%20End/images/1_02.png)
+![services.html](20.%20Front%20End/images/1_01.png)
 
 ### 2. Grid - Basic Responsive Page
 
-![index.html](/images/3_01.png)
+![index.html](20.%20Front%20End/images/3_01.png)
 
 ### 3. Flexbox - Pluralsight login page clone
 
-![Login Page](/images/4_01.png)
+![Login Page](20.%20Front%20End/images/4_01.png)
 
 ### 4. Flexbox and Grid - Netflix landing page clone 
 
-![Landing Page](/images/5_01.png)
-![Tab 1](/images/5_02.png)
-![Tab 2](/images/5_03.png)
-![Tab 3](/images/5_04.png)
+![Landing Page](20.%20Front%20End/images/5_01.png)
+![Tab 1](20.%20Front%20End/images/5_02.png)
+![Tab 2](20.%20Front%20End/images/5_03.png)
+![Tab 3](20.%20Front%20End/images/5_04.png)
 
 ### 5. Basic React Site - Burger Shop
 
-![Landing Page](/images/6_01.png)
-![Burger Build](/images/6_02.png)
-![Checkout Modal](/images/6_03.png)
+![Landing Page](20.%20Front%20End/images/6_01.png)
+![Burger Build](20.%20Front%20End/images/6_02.png)
+![Checkout Modal](20.%20Front%20End/images/6_03.png)
