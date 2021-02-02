@@ -1,0 +1,144 @@
+Names in C++ can refer to variables, functions, structures, enumerations, 
+classes, and class and structure members. When programming projects grow large, 
+the potential for name conflicts increases. You might want the 'List' class from 
+one library and the 'Tree' from the other, and each might expect its own version 
+of Node. Such conflicts are termed namespace problems.
+
+Before starting with namespaces, first clear two words, 
+"Declarative region" and "potential scope"
+
+"Declarative region is the space in which the variable or any data item can 
+be declared."
+
+For example, a variable can be declared outside the functions (global variable) 
+or it can be declared inside the function. So we have two declarative regions 
+in a program.
+
+Potential scope is the place where that variable could be used.  For example, 
+    void fun()
+    {
+        ....   // cant use x before its declaration 
+        int x; // because it is declared here
+        ....  // can use it here    
+    }
+So potential scope is the subset of declarative region.
+
+By using the keyword 'namespace', we create a new declarative region apart 
+from those two. Thus it creates 'space' where we can declare 'names'. 
+
+For example, here are two namespaces with name Jack and Jill:
+
+    namespace Jack 
+    { 
+        double pail;  //variable declaration
+        int hill;
+        void fetch();  //function prototype
+        struct well {...}; //structure declaration
+    }
+
+    namespace Jill
+    { 
+        double bucket (double n) { ... } //function definition
+        int pail;     //Redeclaration confilict won't take place now
+        struct hill;    //Redeclaration confilict won't take place now
+        char fetch;
+    }
+
+Namespaces are open. For example, the following adds the name 'head' in the 
+existing list of names in Jill:
+
+    namespace Jill
+    {
+        int head() {...};
+    }  
+
+/* -------------------------------------------------------------------------- */
+
+Now once we know how to declare a namespace, we should be able to use it. 
+One of the ways to access the name inside a particular namespace is to use 
+scope resolution operator.
+
+    Jack::pail = 13.24;   // Initializing the variable
+    Jill::hill mole;   // Creating a new structure 
+    Jack::fetch();    // Use a function
+
+But using :: again and again is cumbersome task. So to rescue us from this, C++ 
+gave 'using' keyword. Keyword 'using' can be used as - using declarations and 
+using directives. 
+
+The using declaration lets you make particular identifiers available, and the 
+using directive makes the entire namespace accessible.
+
+    using Jill::fetch;   // a using declaration
+    using namespace Jack;   // make all the names in Jack available
+
+Here is a small code to make things more clear on namespaces:
+
+    namespace Jill {
+        double bucket(double n) { ... }
+        double fetch;
+        struct Hill { ... };
+    }
+
+    char fetch; // global namespace
+
+    int main()
+    {
+        using namespace Jill;   // import all namespace names
+        Hill Thrill;     // create a type Jill::Hill structure
+        double water = bucket(2);  // use Jill::bucket();
+        double fetch;     // not an error; hides Jill::fetch
+        cin >> fetch;     // read a value into the local fetch
+        cin >> ::fetch;    // read a value into global fetch
+        cin >> Jill::fetch;   // read a value into Jill::fetch
+        ...
+    }
+
+    int foom()
+    {
+        Hill top;     // ERROR
+        Jill::Hill crest;   // valid
+    }
+    
+You can create an unnamed namespace by omitting the namespace name:
+
+    namespace // unnamed namespace
+    {
+        int ice;
+        int bandycoot;
+    }
+    
+If a namespace has no name, you can’t explicitly use a using directive or using 
+declaration to make the names available elsewhere. In particular, you can’t use 
+names from an unnamed namespace in a file other than the one that contains the 
+namespace declaration.
+
+This provides an alternative to using static variables with internal linkage. 
+Suppose, for example, you have this code:
+    
+    static int counts; // static storage, internal linkage
+    
+    int other();
+    
+    int main()
+    { ... }
+
+    int other()
+    { ... }
+    
+The namespace approach is to do this instead:
+
+    namespace
+    {
+        int counts; // static storage, internal linkage
+    }
+
+    int other();
+
+    int main()
+    { ... }
+    
+    int other()
+    { ... }
+
+/*--------------------------------------------------------------------------- */

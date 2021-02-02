@@ -1,0 +1,114 @@
+Video Link: https://www.youtube.com/watch?v=9RHO6jU--GU
+
+Following is the Classification of various types of Tree Traversals:
+
+    1. BREADTH FIRST TRAVERSAL
+        - Level Order Traversal
+    2. DEPTH FIRST TRAVERSAL
+        - Pre Order Traversal
+        - In Order Traversal
+        - Post Order Traversal
+
+Consider the following tree:
+
+                    F                           - 1
+                /       \
+                D        J                      - 2
+             /    \     /    \
+            B      E   G      K                 - 3
+           /  \        \
+          A     C       I                       - 4
+                       /
+                       H                        - 5
+
+A) LEVEL ORDER TRAVERSAL
+
+    In level order traversal, we need to print -
+        F D J B E G K A C I H
+
+    Traversal:
+    The Level order traversal is bit tricky. Let's see why? Let's say, we print 
+    our first node - F.
+    Now, we may go to left child, and print D. The problem is now I have to 
+    print J, and I can't go backwards to F as D is not storing any 
+    previous/parent pointer.
+
+    We will overcome this problem and see it's implementation in the upcoming 
+    codes. For now we should just learn, how to get the expected outcome of 
+    certain order traversal of a tree. And predicting the outcome of level order 
+    traversal is the easiest as we need to cover nodes from left to right 
+    at each level.
+
+--------------------------------------------------------------------------------
+B) PRE ORDER TRAVERSAL
+
+    In this traversal, Remember the order - <root> <left> <right>
+
+    Traversal:
+    1)  We will start with root F. Then we will move to left subtree. We will 
+        now complete travelling the entire left subtree whose root is D. Once 
+        left subtree is done, we will move to right subtree.
+    2)  Once we are at D, we can say for the left subtree, D is the root. We 
+        will again move towards left. So the next node which we will move to, 
+        after D, is B.
+    3)  Again, when we are at B, it is the root of the subtree with nodes 
+        (B-A-C). So we will move left towards A. Once we are at A, we see there 
+        is no left subtree.
+    4)  So now we return to our node B. We know, if B is the root and we have 
+        travelled left subtree, now we need to go to the right subtree. 
+        So after A, we go to C.
+    5)  We are done with left subtree of D, we go to E. Now we are done with 
+        left subtree of F. So we may go to J.
+    6)  When we are at J, there is left subtree which is unvisited. So we go to G. 
+        We say there isn't any left node in case of G. So we have returned to G 
+        and we go to I. For I, we visit left first viz. H. Then we return to I, 
+        then return to G, then finally return to J.
+    7)  Finally, we go to the right of Node J i.e. K.
+
+    So the order is:    F D B A C E J G I H K
+
+    The implementation of this traversal will be a simple Recursion problem as 
+    we can see when we move to a subtree, we have just moved to a smaller 
+    problem of same kind.
+--------------------------------------------------------------------------------
+C) IN ORDER TRAVERSAL
+
+    In this traversal, the order is - <left> <root> <right>
+
+    Traversal:
+    1)  In this traversal, we will first visit the left subtree and then visit 
+        the current node. We will then go right. So we will start from F, we 
+        will print F later, first we will visit left subtree. So we move to D.
+        With same reasoning, we move to B and then to A.
+    2)  For A, there is nothing in left. So we can now read this as root. We 
+        should now move to the right of A. But there is nothing in the right of 
+        A, so we are done with A and we will return to B.
+    3)  We will now print B, and then we can move to the right of B. For C, 
+        there isnt anything in left or right, so we are done with C.
+    4)  Left of D is now done. So we will read D. Then move to right, E. Now 
+        return from E to D. Now left of F is done. Now we print F and goto 
+        right to J. We will move to left to G. There is nothing in the left of
+        G, so print G and move to I.
+    5)  Continuing in this way, we will get the complete inorder traversal.
+
+    So the order is:    A B C D E F G H I J K
+
+    If you observe here, we got our alphabets in sorted order. This is because, 
+    the Binary Tree which we have chosen above is a special binary tree called 
+    "Binary Search Tree (BST)".
+
+    In BST, the value of the nodes is in the relation:  
+        left node < root node < right node.
+    The inorder traversal of BST gives a sorted list of tree elements.
+--------------------------------------------------------------------------------
+D) POST ORDER TRAVERSAL
+
+    In this traversal, the order is - <left> <right> <root>
+
+    Traversal:
+    We will move to A and print A. Then return to B, move to right and print C. 
+    Then return to B and print B. By now, you should be able to guess the 
+    remaining post order traversal of the tree.
+
+    So the order is:    A C B E D H I G K J F
+--------------------------------------------------------------------------------

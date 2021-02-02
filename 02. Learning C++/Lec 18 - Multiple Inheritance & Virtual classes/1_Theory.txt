@@ -1,0 +1,154 @@
+MULTIPLE INHERITANCE and Virtual Base Classes:
+
+Consider a hotel and make a class Worker for it. We inherit the class Worker and 
+make derived classes Waiter and Singer. Now we have some workers which act as 
+waiters on some days and singers on other in our hotel. So we make a class 
+SingingWaiter which is derived from Waiter and Singer simultaneously. 
+This is Multiple Inheritance.
+
+But while initializing objects of multiple inherited classes, we need to take 
+some extra care.
+
+Suppose you begin by publicly deriving SingingWaiter from Singer and Waiter:
+    class SingingWaiter: public Singer, public Waiter {...};
+    
+Because both Singer and Waiter inherit a Worker component, SingingWaiter winds 
+up with two Worker components. As you might expect, this raises problems. 
+For example, ordinarily you can assign the address of a derived-class object 
+to a base-class pointer, but this becomes ambiguous now:
+    SingingWaiter ed;
+    Worker * pw = &ed; // ambiguous
+
+Normally, such an assignment sets a base-class pointer to the address of the 
+base-class object within the derived object. But ed contains two Worker objects, 
+so there are two addresses from which to choose.You could specify which object 
+by using a type cast:
+    Worker * pw1 = (Waiter *) &ed; // the Worker in Waiter
+    Worker * pw2 = (Singer *) &ed; // the Worker in Singer
+
+This certainly complicates the technique of using an array of base-class 
+pointers to refer to a variety of objects (polymorphism). Having two copies of 
+a Worker object causes other problems, too. However, the real issue is why 
+should you have two copies of a Worker object at all? A singing waiter, 
+like any other worker, should have just one name and one ID.
+
+Virtual base classes allow an object derived from multiple bases that themselves 
+share a common base to inherit just one object of that shared base class. 
+For this example, you would make Worker a virtual base class to Singer and Waiter 
+by using the keyword virtual in the class declarations (virtual and public 
+can appear in either order):
+    class Singer : virtual public Worker {...};
+    class Waiter : public virtual Worker {...};
+    
+Then you would define SingingWaiter as before:
+    class SingingWaiter: public Singer, public Waiter {...};
+
+Now a SingingWaiter object will contain a single copy of a Worker object. 
+In essence, the inherited Singer and Waiter objects share a common Worker 
+object instead of each bringing in its own copy.
+
+--------------------------------------------------------------------------------
+THREE MAJOR DOUBT QUESTIONS:
+1. Why word 'virtual'?
+2. Why don't we keep base classes as virtual by default from the compiler point 
+   of view so that we dont need to declare it in programs?
+3. Are there any changes in defining the member functions or other concepts?
+
+
+ANS 1: After all, there doesn’t seem to be an obvious connection between the 
+concepts of virtual functions and virtual base classes. There is strong pressure 
+from the C++ community to resist the introduction of new keywords. It would be 
+awkward, for example, if a new keyword corresponded to the name of some important 
+function or variable in a major program. So C++ merely recycled the keyword 
+virtual for the new facility — a bit of keyword overloading XD.
+
+ANS 2: First, there are cases in which you might want multiple copies of a base, 
+for example there is possibly a hotel's choice that if a worker works as singer 
+in one hotel branch on some days and as waiter in same hotel's other branch on 
+other days, then he should have two ID numbers. Second, making a base class 
+virtual requires to do some additional accounting i.e. more data to manage and 
+reduction in speed of execution because program has to see again and again which 
+copy of base class it is working with, and you shouldn’t have to pay for that 
+facility if you don’t need it.
+
+ANS 3: Yes. Making virtual base classes work requires adjustments to C++ rules, 
+and you have to code some things differently.
+
+------- NEW RULE 1: CONSTRUCTOR RULES -------
+
+Having virtual base classes requires a new approach to class constructors. 
+With non-virtual base classes, the only constructors that can appear in an 
+initialization list are constructors for the immediate base classes. But these 
+constructors can, in turn, pass information on to their bases. For example, 
+you can have the following organization of constructors:
+
+    class A
+    {
+            int a;
+        public:
+            A(int n = 0) : a(n) {}
+            ...
+    };
+    
+    class B: public A
+    {
+            int b;
+        public:
+            B(int m = 0, int n = 0) : A(n), b(m) {}
+            ...
+    };
+    
+    class C : public B
+    {
+            int c;
+        public:
+            C(int q = 0, int m = 0, int n = 0) : B(m, n), c(q) {}
+            ...
+    };
+    
+A C constructor can invoke only constructors from the B class, and a B 
+constructor can invoke only constructors from the A class. Here the C 
+constructor uses the q value and passes the values of m and n back to the B 
+constructor.The B constructor uses the value of m and passes the value of n 
+back to the A constructor. This automatic passing of information doesn’t work 
+if Worker is a virtual base class. For example, consider the following 
+possible constructor for the MI example:
+
+    SingingWaiter(const Worker & wk, int p = 0, int v = Singer::other) : Waiter(wk,p), Singer(wk,v) {} // flawed
+
+The problem is that automatic passing of information would pass wk to the Worker 
+object via two separate paths (Waiter and Singer). To avoid this potential 
+conflict, C++ disables the automatic passing of information through an 
+intermediate class to a base class if the base class is virtual. 
+
+Thus, the previous constructor will initialize the panache and voice members, 
+but the information in the 'wk' argument won’t get to the Waiter subobject. 
+However, the compiler must construct a base object component before constructing 
+derived objects; in this case, it will use the default Worker constructor. 
+
+If you want to use something other than the default constructor for a virtual 
+base class, you need to invoke the appropriate base constructor explicitly.
+Thus, the constructor should look like this:
+    
+    SingingWaiter(const Worker & wk, int p = 0, int v = Singer::other) : Worker(wk), Waiter(wk,p), Singer(wk,v) {}
+    
+Here the code explicitly invokes the Worker(const Worker &) constructor. 
+Note that this usage is legal and often necessary for virtual base classes, 
+and it is illegal for non-virtual base classes.
+
+------- NEW RULE 2: MEMBER FUNCTION RULES -------
+
+Suppose our base class has function show() in it to print details of it. 
+And in derived class, we overload the function show(). In case of single 
+inheritance it was easy to determine which show to use (the most recent 
+ancestor's show() function. But here there are two most recent ancestors 
+and both contain show. So a call like, 
+
+    SingingWaiter s1;
+    s1.show();  // is ambiguous, we don't know whether to call show of Singer or of Waiter. 
+                // Show of worker is already discarded above.
+    
+This problem is solved by using scope resolution operator.
+
+    s1.Singer::show();
+    s1.Waiter::show();

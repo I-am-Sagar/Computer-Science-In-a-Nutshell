@@ -1,0 +1,75 @@
+Maps are associative containers. 
+
+Let's understand this by taking an example:
+
+We define map as following,
+
+    map <string, int> m; 
+
+means there is a map 'm' in which there are strings and each string 
+is associated with an integer.
+
+Now consider 5 people with names, "Sagar", "Harshal", "Ayush", "Vishnu" 
+and "Mohammed".
+Let their ages be 20, 22, 24, 26, 28 respectively. What can we do is, 
+
+m["Sagar"] = 20;
+m["Harshal"] = 22; and so on.
+
+What we see amazing thing here is, we are using m as array with index as strings.
+We are no longer doing something like, m[1], m[2], etc. We have literally changed 
+indices as "Strings". 
+
+The more fun starts when we create a map like this, 
+
+    map <float, string> m;
+
+Now we can do, 
+
+    m[3.14] = "pi"; 
+
+This is even more awkward as index is now a float. We say here, 3.14 is 
+associated with a string "pi". In general, 
+
+    map[key] = value;
+
+Each element has a key value and a mapped value. No two mapped values can have 
+same key values.
+--------------------------------------------------------------------------------
+
+But the most basic question comes, "Where should I use maps?" 
+Let's take an example.
+
+Suppose we have an array {10, 32, 20, 10, 32, 20, 20 ,31, 21, 21, 10};
+I need to find the distinct elements and how many times each element occurs in 
+array. Now solving distinct element part is easy by using sets, but here is 
+something additional we need to store.
+
+So what we can do is - We can create a map where every element of this array 
+will be associated to another integer which will be it's frequency of occurence 
+in the array.
+
+    map <int, int> m;
+
+Now we can just traverse through array once, and keep on increasing the 
+frequency as,
+
+    m[arr[i]]++;
+
+Now when i = 3, arr[i] = 10, and it has occurred 2nd time, so m[10] will 
+increase by 1 and become 2. Since this is map, finding the mapped value of 
+corresponding 'key' is a single step process. 
+
+We have solved a similar kind of problem in the next code = 
+"2_Different_names_problem.cpp"
+--------------------------------------------------------------------------------
+
+Like there was an unordered_set corresponding to set, there is an unordered_map 
+corresponding to maps.
+
+map (like set) is an ordered sequence of unique keys whereas in unordered_map 
+key can be stored in any order, so unordered. Time complexity of map operations 
+is O(Log n) while for unordered_map, it is O(1) on average.
+
+We have used unordered_map in last code "5_Pair_sum_to_zero_problem.cpp"
+--------------------------------------------------------------------------------

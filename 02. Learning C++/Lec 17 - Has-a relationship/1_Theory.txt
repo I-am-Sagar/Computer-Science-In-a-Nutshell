@@ -1,0 +1,46 @@
+HAS-A RELATIONSHIP:
+
+    A lunch might contain a fruit. But a lunch, in general, is not a fruit. 
+    Therefore, you should not derive a Lunch class from the Fruit class in an 
+    attempt to place fruit in a lunch. The correct way to handle putting 
+    fruit into a lunch is to consider the matter as a has-a relationship: 
+    A lunch has a fruit.
+    
+    This relationship can be achieved by 'Containment'.
+    
+    We need to make a student class with two members: one to represent student 
+    name and other to represent set of scores of the quiz competitions he/she 
+    participated. For first one, we can use string class and for other we can 
+    use fixed array. But fixed array provides us the limitation of the amount 
+    of data user wants to enter and if the fixed size is sufficiently large, 
+    we are wasting data. So we should use dynamic array class. Writing a whole 
+    new array class which allocates memory dynamically for array using 'new' 
+    operator is not a good idea as C++ already provides us with such dynamic 
+    array class called valarray.
+    
+    Followint is the syntax of declaring a valarray:
+        valarray<int> v2(8);   // an array of 8 int elements
+        valarray<int> v3(10,8);   // an array of 8 int elements, each set to 10
+    
+        double cgpa[5] = {9.9, 9.5, 8.5, 9.1, 9.2};
+        // an array of 4 double elements initialized to first 4 elements of cgpa
+        valarray<double> cpi (cgpa, 4);
+        // an array of 7 double elements initialized to first 5 elements of cgpa, rest all 0
+        valarray<double> cpi2 (cgpa, 7); 
+    
+    Here are few operations which we can do with these valarrays:
+        
+    a) We can use array notation to access the members. cpi[2] = 8.5;
+    b) cpi.size() returns the number of elements stored in valarray
+    c) cpi.sum() returns the sum of all elements of valarray
+    d) cpi.max() returns the max element in the valarray
+    e) cpi.min() returns the min element in the valarray
+    f) cpi.swap(cpi2) will swap the contents of cpi and cpi2
+    g) cpi.cshift() will shift every element to right by 1 position and the last 
+       element goes to the first position
+    
+    A student is not a name. A student is not an array of quiz scores. What you 
+    have here is a has-a relationship. A student has a name, and a student has 
+    an array of quiz scores. The usual C++ technique for modeling has-a 
+    relationships is to use composition or containment — that is, to create a 
+    class composed of, or containing, members that are objects of another class.

@@ -1,4 +1,4 @@
-## Computer Science - In a Nutshell
+## Learning Computer Science
  
 ### MODULE 1 - LEARN TO CODE 
 
@@ -59,57 +59,49 @@
 18. Theory of Computation
 19. Compiler Design
 
-**Part 11. Desktop Applications**  
+**Part 11. Web Applications**  
 
-20. GUI using Qt Framework
-
-**Part 12. Web Applications**  
-
-21. Front End
-22. Back End
-23. Modern Concepts
-
-**Part 13. Games**  
-
-24. Game Maths and Physics
-25. Graphics Theory
-26. Graphics API - DirectX
-27. Game Engine - Unreal
+20. Front End
+21. Back End
+22. Modern Concepts
 
 ### MODULE 6 - OPERATIONS  
 
-**Part 14. Linux**  
+**Part 12. Linux**  
 
-28. Linux
+23. Linux
 
-**Part 15. Cloud**  
+**Part 13. Cloud**  
 
-29. Cloud
-30. AWS
-31. Docker and Kubernetes
+24. Cloud
+25. AWS
+26. Docker and Kubernetes
 
 ### MODULE 7 - MATHEMATICS  
 
 **Part 16. Maths**  
 
-32. Linear Algebra
-33. Multivariate Calculus
-34. Probability and Stats
-35. Signals and Systems
+27. Discrete Mathematics
+28. Linear Algebra
+29. Multivariate Calculus
+30. Probability and Stats
+31. Abstract Algebra & Cryptography
+32. Signals and Systems
 
 ### MODULE 8 - ML and AI   
 
 **Part 17. ML and AI**    
 
-36. Pattern Recognition and ML
-37. Time Series Analysis
-38. AI
-39. Deep Learning
-40. Reinforcement Learning
+33. Pattern Recognition and ML
+34. Time Series Analysis
+35. AI
+36. Deep Learning
+37. Reinforcement Learning
 
 **Part 18. Applications**  
 
-41. NLP
-42. Computer Vision
+38. NLP
+39. Computer Vision
 
+40. Miscellaneous Concepts
 ---

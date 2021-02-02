@@ -1,0 +1,78 @@
+// Video Link: https://www.youtube.com/watch?v=H5JubkIy_p8
+
+1. FULL/STRICT Binary Tree
+
+A Binary Tree is full if every node has 0 or 2 children. Following are examples 
+of a full binary tree. We can also say a full binary tree is a binary tree in 
+which all nodes except leaves have two children.
+
+               18
+             /    \
+           15       30
+         /  \      /  \
+       40    50   100  40
+           /  \
+         15    20
+        /  \
+      40    50
+    /   \
+   30   50
+
+In a Full Binary Tree, number of leaf nodes is number of internal nodes plus 1.
+       L = N + 1
+where L = Number of leaf nodes, N = Number of internal nodes.
+
+--------------------------------------------------------------------------------
+2. COMPLETE Binary Tree
+
+A Binary Tree is a complete binary tree if all levels are completely filled 
+except possibly the last level and the last level has all keys as left as 
+possible.
+
+                18
+              /    \
+            15      30
+           /  \     /  \
+         40    50  100  40
+       /  \   /
+       8    7  9
+
+--------------------------------------------------------------------------------
+3. PERFECT Binary Tree
+
+A Binary Tree is a perfect binary tree if all internal nodes have two children 
+and all leaves are at the same level.
+
+              18
+           /       \
+         15         30
+        /  \        /  \
+      40    50    100   40
+
+A Perfect Binary Tree of height h (where height is the number of nodes on the 
+path from the root to leaf) has 2^h – 1 nodes.
+--------------------------------------------------------------------------------
+4. SKEWED Binary Tree
+
+A skewed tree is a tree where each node has only one child node or none.
+
+Examples:
+
+          5
+         /
+        4
+         \
+          3
+          /
+         2
+  This is a skewed tree.
+
+            5
+            /
+           4
+           \
+            3
+          /  \
+         2    4
+  This is not a skewed tree.
+--------------------------------------------------------------------------------

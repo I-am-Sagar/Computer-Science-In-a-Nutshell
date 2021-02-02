@@ -1,0 +1,109 @@
+ABSTRACT BASE CLASS (ABC):
+
+Sometimes applying the is-a rule is not as simple as it might appear. 
+Suppose, for example, you are developing a graphics program that is supposed to 
+represent, among other things, circles and ellipses.A circle is a special case 
+of an ellipse: 
+
+It’s an ellipse whose long axis is the same as its short axis. Therefore, 
+all circles are ellipses, and it is tempting to derive a Circle class from 
+an Ellipse class. 
+
+But when you get to the details, you may find problems.
+
+To see this, first consider what you might include as part of an Ellipse class. 
+Data members could include the coordinates of the center of the ellipse, 
+the semimajor axis (half the long diameter), the semiminor axis (half the short diameter), 
+and an orientation angle that gives the angle from the horizontal coordinate 
+axis to the semimajor axis. Also the class could include methods to move the 
+ellipse, to return the area of the ellipse, to rotate the ellipse, and to scale 
+the semimajor and semiminor axes.
+
+Although a circle is an ellipse, this derivation is awkward. For example, a 
+circle needs only a single value, its radius, to describe its size and shape 
+instead of having a semimajor axis (a) and semiminor axis (b).The Circle 
+constructors can take care of that by assigning the same value to both 
+the a and b members, but then you have redundant representation of the 
+same information. 
+
+The angle parameter and the Rotate() method don’t really make sense for a 
+circle, and the Scale() method, as it stands, can change a circle to a 
+non-circle by scaling the two axes differently. You can try fixing things 
+with tricks, such as putting a redefined Rotate() method in the private 
+section of the Circle class so that Rotate() can’t be used publicly with a 
+circle, but, on the whole, it seems simpler to define a Circle class without 
+using inheritance.
+
+Now the class has only the members it needs.Yet this solution also seems weak.
+The Circle and Ellipse classes have a lot in common, but defining them 
+separately ignores that fact. 
+
+There is another solution: You can abstract from the Ellipse and Circle classes 
+what they have in common and place those features in an ABC. Next, you derive 
+both the Circle and Ellipse classes from the ABC. Then, for example, you can 
+use an array of base-class pointers to manage a mixture of Ellipse and Circle 
+objects—that is, you can use a polymorphic approach. In this case, what the 
+two classes have in common are the coordinates of the center of the shape; 
+a Move() method, which is the same for both; and an Area() method, which works 
+differently for the two classes. Indeed, the Area() method can’t even be 
+implemented for the ABC because it doesn’t have the necessary data members. 
+C++ has a way to provide an unimplemented function by using a pure virtual
+function. A pure virtual function has = 0 at the end of its declaration, 
+as shown for the Area() method:
+
+class BaseEllipse // abstract base class
+{
+    private:
+        double x; // x-coordinate of center
+        double y; // y-coordinate of center
+        ...
+    public:
+        BaseEllipse(double x0 = 0, double y0 = 0) : x(x0),y(y0) {}
+        virtual ~BaseEllipse() {}
+        void Move(int nx, ny) { x = nx; y = ny; }
+        virtual double Area() const = 0; // a pure virtual function
+        ...
+}
+
+When a class declaration contains a pure virtual function, you can’t create 
+an object of that class. The idea is that classes with pure virtual functions 
+exist solely to serve as base classes. For a class to be a genuine ABC, it has 
+to have at least one pure virtual function. It is the = 0 in the prototype that 
+makes a virtual function a pure virtual function. In the case of the Area() 
+method, the function has no definition, but C++ allows even a pure virtual 
+function to have a definition. 
+
+For example, perhaps all the base methods are like Move() in that they can be 
+defined for the base class, but you still need to make the class abstract.
+
+You could then make the prototype virtual: void Move(int nx, ny) = 0;
+This makes the base class abstract. But then you could still provide a 
+definition in the implementation file:
+
+        void BaseEllipse::Move(int nx, ny) { x = nx; y = ny; }
+        
+In short, the = 0 in the prototype indicates that the class is an abstract base 
+class and that the class doesn’t necessarily have to define the function. Now 
+you can derive the Ellipse class and Circle class from the BaseEllipse class, 
+adding the members needed to complete each class. One point to note is that 
+the Circle class always represents circles, whereas the Ellipse class represents 
+ellipses that can also be circles. 
+
+However, an Ellipse class circle can be rescaled to a non-circle, whereas a 
+Circle class, circle must remain a circle. A program using these classes would 
+be able to create Ellipse objects and Circle objects but no BaseEllipse objects. 
+Because Circle and Ellipse objects have the same base class, a collection of such 
+objects can be managed with an array of BaseEllipse pointers. Classes such as 
+Circle and Ellipse are sometimes termed concrete classes to indicate that you 
+can create objects of those types. In short, an ABC describes an interface that 
+uses a least one pure virtual function, and classes derived from an ABC use 
+regular virtual functions to implement the interface in terms of the properties 
+of the particular derived class.
+
+The concept of ABC can be well understood by taking the same bank account 
+problem, starting with an ABC called AcctABC, that contain all methods and data 
+members that are common to both the Saving and the Overdraft classes. 
+The methods that are to work differently for the Overdraft class than they do 
+for the Saving class should be declared as virtual functions. At least one 
+virtual function should be a pure virtual function in order to make the 
+AcctABC class abstract.

@@ -1,0 +1,110 @@
+Q1. How many different BTs are possible with n nodes?
+
+-> Video Link 1: https://www.youtube.com/watch?v=SIXAYLoKLc8
+   Video Link 2: https://www.youtube.com/watch?v=JrTKVvYhT_k
+   For extra theory on Catalan Numbers:
+   Video Link 3: https://www.youtube.com/watch?v=MgSjny5aYig
+
+   Now if we are asked to write a function that takes 'n' and
+   returns the number of possible BTs, we basically need to write
+   function of "Nth Catalan Number". Here is the code:
+
+    // Recursive Implementation
+    unsigned long int catalan(int n) {
+        if (n <= 1) return 1;
+        // catalan(n) is sum of catalan(i)*catalan(n-i-1)
+        unsigned long int res = 0;
+        for (int i=0; i<n; i++)
+            res += catalan(i)*catalan(n-i-1);
+
+        return res;
+    }
+
+   Let us see the time complexity of above function:
+
+   To evaluate the complexity, let us focus on the number
+   of recursive calls performed, let C(n).
+   A call for n implies exactly 2(n-1) recursive calls,
+   each of them adding their own costs, 2(C(1)+C(2)+...C(n-1)).
+
+   A call for n+1 implies exactly 2n recursive calls, each of
+   them adding their own costs, 2(C(1)+C(2)+...C(n-1)+C(n)).
+
+   By difference, C(n+1)-C(n) = 2+2C(n), which can be written
+    C(n) = 2+3C(n-1).
+
+    C(1) = 0
+    C(2) = 2+2C(1) = 2+3C(0) = 2
+    C(3) = 4+2(C(1)+C(2)) = 2+3C(2) = 8
+    C(3) = 6+2(C(1)+C(2)+C(3)) = 2+3C(3) = 26
+    C(4) = 8+2(C(1)+C(2)+C(3)+C(4)) = 2+3C(4) = 80
+    ...
+    C(n) = 2n-2+2(C(1)+C(2)+...C(n-1)) = 2+3C(n-1)
+
+    To solve this recurrence easily, notice that
+
+    C(n)+1 = 3(C(n-1)+1) = 9(C(n-2)+1) = ...3^(n-2)(C(2)+1) = 3^(n-1)
+
+   Hence, for n>1 the exact formula is C(n) = 3^(n-1)-1.
+
+   Therefore, time complexity is O(3^n).
+
+   The time complexity could be greatly reduced by using
+   "Dynamic Programming" as we can observe that the above recursive
+   implementation does a lot of repeated work.
+
+   Here is the dynamic programming approach for nth catalan number:
+
+    unsigned long int catalanDP (int n) {
+        unsigned long int catalan[n+1];
+        catalan[0] = catalan[1] = 1;
+        for (int i = 2; i <= n; i++) {
+            catlan[i] = 0;
+            for (int j = 0; j < i; j++)
+                catalan[i] += catalan[j]*catalan[i-j-1];
+        }
+        return catalan[n];
+    }
+
+    From the concepts explained in videos, we know:
+
+    Number of BTs   =   catalan(n) * factorial(n);
+    with n nodes
+
+    and
+
+    Number of BSTs  =   catalan(n);
+    with n nodes
+--------------------------------------------------------------------------------
+Q2. If given two traversals of BT, can we construct BT uniquely?
+
+-> It depends on what traversals are given. If one of the traversal methods is
+   Inorder then the tree can be constructed uniquely, otherwise not.
+
+   Therefore, the following combinations can uniquely identify a tree:
+    • Inorder and Preorder
+    • Inorder and Postorder
+    • Inorder and Level-order
+   The following combinations do not uniquely identify a tree.
+    • Postorder and Preorder
+    • Preorder and Level-order
+    • Postorder and Level-order
+
+   For example, Preorder, Level-order and Postorder traversals are the
+   same for the below given trees:
+
+                a                   a
+               /        and          \
+              b                       b
+--------------------------------------------------------------------------------
+Additional Point:
+
+If someone gives you a Preorder Traversal of a binary tree, and asks - how many
+binary trees with this preorder traversal are possible?
+
+You should just count the number of nodes, say it be n, and return the 'n'th 
+Catalan number.
+
+Thus, by giving preorder or postorder traversal of binary tree with 'n' nodes,
+the possiblities of binary trees reduced by n!.
+--------------------------------------------------------------------------------

@@ -1,0 +1,100 @@
+A) TYPES OF INHERITANCE:
+
+    a) Single Inheritance: 
+    
+        - class manager is derived from class employee (even manager works as 
+          an employee in organisation) 
+    
+    b) Multiple Inheritance: 
+    
+        - class final_result is dereived from class mid_sem and class end_sem 
+          (more base classes one derived class)
+
+    c) Hierarchial Inheritance: 
+    
+        - class bike, class car, class bus are derived from class vehicle 
+          (more derived classes one base class)
+
+    d) Multilevel Inheritance: 
+    
+        - class son is derived from class parent which itself is derived from 
+          class grandparent (derived class is derived from another derived class)
+
+    e) Hybrid Inheritance: 
+    
+        - parent class is student. Two classes of test and sports are derived 
+          from student class. (Till now its Hierarchial inheritance). Now class 
+          result is derived from class test and class sports. (This was Multiple
+          Inheritance). Now the relationship which exists between student and 
+          result is Hybrid Inheritance.
+    
+b) IS-A RELATIONSHIP
+
+    a) Rose is-a flower
+        
+        Class rose has all the properties of class flower like fragrance, 
+        petals, etc.
+
+        Class rose has some additional properties of itself like rosy fragrance, 
+        thorns, etc.
+
+        So we say, rose is specialization of class flower OR class flower is 
+        generalization of class rose.
+        
+    b) Red rose is-a rose
+    
+        Class red rose has some additional properties like rosy colour and all 
+        other properties of class rose as well. So we say again, class red rose 
+        is specialization of class rose or class rose is generalization of 
+        class red rose.
+        
+    Another examples: Two-wheeler is-a vehicle, Three-wheeler is-a vehicle, 
+    manager is-a employee, etc.
+
+    So whenever there is is-a relationship, we use 'public' derivation. Example;
+    
+        class Employee;
+        class Manager: public Employee;
+        
+        class Vehicle;
+        class TwoWheeler: public Vehicle
+        class ThreeWheeler: public Vehicle
+        
+        class Flower;
+        class Rose: public Flower;
+        class Redrose: public Rose;
+        
+c) RULES OF IS-A RELATIONSHIP
+
+    a) Data members
+        
+        - Derived class inherits all data members of Base class.
+        - Derived class may add data members of its own.
+    
+    b) Member Functions
+    
+        - Derived class inherits all member functions of Base class.
+        - Derived class may override a member function of Base class by 
+          redefining it with same signature.
+        - Derived class may overload a member function of Base class by 
+          redefining it with same name; but different signature.
+        - Derived class may add new member function of its own.
+        - Derived class does not inherit the static member functions of the 
+          base class.
+        - Derived class does not inherit the friend functions of the base class 
+          because they aren't class members.
+        
+    c) Access Specification
+    
+        - Derived class cannot access private members of Base class
+        - Derived class can access protected members of Base class
+        
+    d) Constructor-Destructor
+        
+        - The constructor of the Derived class must first call a constructor of 
+          Base class to construct the Base class instance of the Derived class.
+        - The destructor of the Derived class must call the destructor of Base 
+          class to destruct the Base class instance of the Derived class.
+
+    The next code i.e. usebank.cpp shows IS-A relationship between Saving 
+    account and Overdraft account.
